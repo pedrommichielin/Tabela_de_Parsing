@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,17 +8,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #3f51b5; /* Indigo */
-            --accent-color: #ff9800; /* Orange */
-            --success-color: #4CAF50; /* Green */
-            --error-color: #F44346; /* Red */
+            --primary-color: #3f51b5;
+            /* Indigo */
+            --accent-color: #ff9800;
+            /* Orange */
+            --success-color: #4CAF50;
+            /* Green */
+            --error-color: #F44346;
+            /* Red */
             --bg-color: #f4f7f6;
             --card-bg: #ffffff;
             --text-color: #333;
         }
-        html, body {
-            height: auto; 
-            overflow-y: auto; 
+
+        html,
+        body {
+            height: auto;
+            overflow-y: auto;
             margin: 0;
             padding: 0;
         }
@@ -27,7 +34,7 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
-            padding: 10px; 
+            padding: 10px;
             box-sizing: border-box;
         }
 
@@ -36,28 +43,28 @@
             min-height: calc(100vh - 20px);
             margin: 0 auto;
             background: var(--card-bg);
-            padding: 20px; 
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             display: flex;
-            flex-direction: column;
+            flex-direction: column; 
         }
 
         h1 {
             color: var(--primary-color);
             text-align: center;
             margin-top: 0;
-            margin-bottom: 10px; 
+            margin-bottom: 10px;
             font-size: 1.8em;
             font-weight: 700;
         }
-        
+
         h2 {
             font-size: 1.4em;
-            margin-top: 10px; 
-            margin-bottom: 5px; 
+            margin-top: 10px;
+            margin-bottom: 5px;
         }
-        
+
         h3 {
             font-size: 1.1em;
             margin-top: 5px;
@@ -66,25 +73,25 @@
 
         /* --- Controles (Geral) --- */
         .controls {
-            background-color: #e8eaf6; 
-            padding: 10px; 
+            background-color: #e8eaf6;
+            padding: 10px;
             border-radius: 6px;
             margin-bottom: 10px;
             display: flex;
             align-items: center;
-            gap: 10px; 
+            gap: 10px;
         }
 
         .controls input[type="text"] {
             flex-grow: 1;
-            padding: 8px; 
+            padding: 8px;
             border: 2px solid #ccc;
             border-radius: 4px;
             font-size: 0.9em;
         }
 
         .controls button {
-            padding: 8px 12px; 
+            padding: 8px 12px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
@@ -96,25 +103,28 @@
         .controls button:hover:not(:disabled) {
             opacity: 0.9;
         }
-        
-        #btnNext, #btnBack {
+
+        #btnNext,
+        #btnBack {
             background-color: var(--accent-color);
             color: white;
         }
-        
+
         #btnGenerate {
             background-color: var(--primary-color);
             color: white;
         }
-        
+
         #btnDerive {
-             background-color: #00bcd4; /* Cyan */
-             color: white;
+            background-color: #00bcd4;
+            /* Cyan */
+            color: white;
         }
-        
+
         #btnDeriveReset {
-             background-color: #9e9e9e; /* Grey */
-             color: white;
+            background-color: #9e9e9e;
+            /* Grey */
+            color: white;
         }
 
         .controls button:disabled {
@@ -123,12 +133,12 @@
         }
 
         .results {
-            padding: 10px; 
+            padding: 10px;
             font-size: 1em;
             font-weight: 700;
             border-radius: 6px;
             text-align: center;
-            min-height: 40px; 
+            min-height: 40px;
         }
 
         .output-success {
@@ -142,48 +152,48 @@
         }
 
         #derivationOutput {
-            background-color: #fff3e0; 
-            color: #333; 
-            text-align: left; 
-            padding: 8px; 
-            margin-bottom: 10px; 
+            background-color: #fff3e0;
+            color: #333;
+            text-align: left;
+            padding: 8px;
+            margin-bottom: 10px;
             min-height: 30px;
         }
-        
+
         #derivationHistory {
-            margin-bottom: 10px; 
+            margin-bottom: 10px;
         }
 
         #derivationHistory ol {
             padding-left: 20px;
-            max-height: 100px; 
-            overflow-y: auto; 
+            max-height: 100px;
+            overflow-y: auto;
             border: 1px solid #ccc;
             padding: 5px 20px;
             border-radius: 4px;
         }
-        
+
         #derivationHistory li {
             font-size: 0.9em;
             margin: 2px 0;
         }
-        
+
         hr {
-            margin: 10px 0; 
+            margin: 10px 0;
             border: 0;
             border-top: 1px solid #ccc;
         }
 
         .analysis-section {
             display: flex;
-            gap: 10px; 
+            gap: 10px;
             margin-top: 10px;
-            flex-grow: 1; 
-            min-height: 300px; 
+            flex-grow: 1;
+            min-height: 300px;
             max-height: 55vh;
         }
-        
-        .analysis-section > div {
+
+        .analysis-section>div {
             padding: 5px;
             border-radius: 4px;
             min-height: 0;
@@ -192,33 +202,35 @@
         }
 
         .parsing-table-container {
-            flex: 0 0 350px; 
+            flex: 0 0 350px;
             min-width: 300px;
-            order: 1; 
+            order: 1;
         }
-        
+
         .history-container {
-            flex: 1; 
+            flex: 1;
             order: 2;
         }
 
         #parsingTable {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.75em; 
+            font-size: 0.75em;
             text-align: center;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             margin-top: 0;
         }
 
-        #parsingTable th, #parsingTable td {
+        #parsingTable th,
+        #parsingTable td {
             border: 1px solid #ddd;
-            padding: 4px 2px; 
+            padding: 4px 2px;
             transition: background-color 0.4s ease;
         }
-        
-        #parsingTable th:first-child, #parsingTable td:first-child {
-            width: 30px; 
+
+        #parsingTable th:first-child,
+        #parsingTable td:first-child {
+            width: 30px;
         }
 
         #parsingTable th {
@@ -244,7 +256,7 @@
         }
 
         #historyScrollContainer {
-            flex-grow: 1; 
+            flex-grow: 1;
             max-height: 100%;
             overflow-y: auto;
             border: 1px solid #ccc;
@@ -255,668 +267,705 @@
             width: 100%;
             border-collapse: collapse;
             text-align: left;
-            font-size: 0.9em; 
+            font-size: 0.9em;
         }
 
-        #historyTable th, #historyTable td {
+        #historyTable th,
+        #historyTable td {
             border: 1px solid #e0e0e0;
-            padding: 6px; 
+            padding: 6px;
         }
 
         #historyTable th {
-            background-color: #607d8b; 
+            background-color: #607d8b;
             color: white;
             position: sticky;
-            top: 0; 
+            top: 0;
             z-index: 10;
         }
 
         #historyTable tr.current-step {
-            background-color: #fffde7; 
+            background-color: #fffde7;
             font-weight: bold;
         }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h1>Simulador de Parsing</h1>
-    
-    <hr>
-    
-    <h2>Gerador de Sentenças Válidas (Derivação)</h2>
+    <div class="container">
+        <h1>Simulador de Parsing</h1>
 
-    <div class="controls" style="background-color: #e3f2fd; justify-content: flex-start;">
-        <input type="text" id="ntDerivation" placeholder="Próximo NT a expandir (ex: S)" style="width: 150px;">
-        <input type="text" id="terminalDerivation" placeholder="Terminal (ex: a)" style="width: 150px;">
-        <button id="btnDerive" disabled>Aplicar Produção</button>
-        <button id="btnDeriveReset">Novo Início</button>
-    </div>
+        <hr>
 
-    <div id="derivationOutput" class="results">
-        <strong>Derivação Atual:</strong> <span id="currentDerivation">S</span>
-    </div>
+        <h2>Gerador de Sentenças Válidas (Derivação)</h2>
 
-    <div id="derivationHistory">
-        <h3>Histórico de Derivação</h3>
-        <ol id="derivationList">
-            </ol>
-    </div>
-    
-    <hr>
-
-    <h2>Analisador de Sentenças (Parsing)</h2>
-    
-    <div class="controls">
-        <input type="text" id="inputSentence" placeholder="Sentença para análise (ex: dadb)" title="A sentença válida será copiada automaticamente do Gerador.">
-        <button id="btnBack" disabled>← Voltar</button>
-        <button id="btnNext">Próximo →</button>
-        <button id="btnGenerate">Gerar Tudo Automaticamente</button>
-    </div>
-
-    <div id="output" class="results">Aguardando a sentença...</div>
-
-    <div class="analysis-section">
-        
-        <div class="parsing-table-container">
-             <h3>Tabela de Parsing (Gramática)</h3>
-             <table id="parsingTable">
-                 <thead>
-                     <tr>
-                         <th>#</th>
-                         <th data-terminal="a">a</th>
-                         <th data-terminal="b">b</th>
-                         <th data-terminal="c">c</th>
-                         <th data-terminal="d">d</th>
-                         <th data-terminal="$">$</th>
-                     </tr>
-                 </thead>
-                 <tbody>
-                     <tr data-nonterminal="S">
-                         <td>S</td>
-                         <td data-prod="S->aAb">S→aAb</td>
-                         <td data-prod="S->Bb">S→Bb</td>
-                         <td data-prod="-">-</td>
-                         <td data-prod="S->Bb">S→Bb</td>
-                         <td data-prod="-">-</td>
-                     </tr>
-                     <tr data-nonterminal="A">
-                         <td>A</td>
-                         <td data-prod="A->aCd">A→aCd</td>
-                         <td data-prod="-">-</td>
-                         <td data-prod="A->cBc">A→cBc</td>
-                         <td data-prod="A->dS">A→dS</td>
-                         <td data-prod="-">-</td>
-                     </tr>
-                     <tr data-nonterminal="B">
-                         <td>B</td>
-                         <td data-prod="-">-</td>
-                         <td data-prod="B->bAS">B→bAS</td>
-                         <td data-prod="-">-</td>
-                         <td data-prod="B->dA">B→dA</td>
-                         <td data-prod="-">-</td>
-                     </tr>
-                     <tr data-nonterminal="C">
-                         <td>C</td>
-                         <td data-prod="-">-</td>
-                         <td data-prod="-">-</td>
-                         <td data-prod="C->cS">C→cS</td>
-                         <td data-prod="C->&" title="Epsilon (String vazia)" class="epsilon-label">C→&</td>
-                         <td data-prod="-">-</td>
-                     </tr>
-                 </tbody>
-             </table>
+        <div class="controls" style="background-color: #e3f2fd; justify-content: flex-start;">
+            <input type="text" id="ntDerivation" placeholder="Próximo NT a expandir (ex: S)" style="width: 150px;">
+            <input type="text" id="terminalDerivation" placeholder="Terminal (ex: a)" style="width: 150px;">
+            <button id="btnDerive" disabled>Aplicar Produção</button>
+            <button id="btnDeriveReset">Novo Início</button>
         </div>
 
-        <div class="history-container">
-            <h3>Passos da Análise (Histórico)</h3>
-            <div id="historyScrollContainer">
-                <table id="historyTable">
+        <div id="derivationOutput" class="results">
+            <strong>Derivação Atual:</strong> <span id="currentDerivation">S</span>
+        </div>
+
+        <div id="derivationHistory">
+            <h3>Histórico de Derivação</h3>
+            <ol id="derivationList">
+            </ol>
+        </div>
+
+        <hr>
+
+        <h2>Analisador de Sentenças (Parsing)</h2>
+
+        <div class="controls">
+            <input type="text" id="inputSentence" placeholder="Sentença para análise (ex: dadb)"
+                title="A sentença válida será copiada automaticamente do Gerador.">
+            <button id="btnBack" disabled>← Voltar</button>
+            <button id="btnNext">Próximo →</button>
+            <button id="btnGenerate">Gerar Tudo Automaticamente</button>
+        </div>
+
+        <div id="output" class="results">Aguardando a sentença...</div>
+
+        <div class="analysis-section">
+
+            <div class="parsing-table-container">
+                <div id="gramatica-container"
+                    style="margin-bottom: 10px; padding: 10px; background: #f6f6f6; border-radius: 8px;">
+                    <h3 style="margin-top: 0;">Gramática (onde & = ε)</h3>
+
+                    <pre style="font-size: 10px; margin-bottom: 10px; white-space: pre-line;">
+                        S ::= aAb | Bb
+                        A ::= cBc | aCd | dS
+                        B ::= bAS | dA
+                        C ::= cS  | &
+                    </pre>
+                    <h3 style="margin-top: 10px;">First e Follow</h3>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 10px;">
+                        <tr>
+                            <th style="text-align: left; padding: 5px;">First</th>
+                            <th style="text-align: left; padding: 5px;">Follow</th>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 5px;">S = {a, b, d}</td>
+                            <td style="padding: 5px;">S = {$, b, a, d, c}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 5px;">A = {a, c, d}</td>
+                            <td style="padding: 5px;">A = {b, a, d, c}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 5px;">B = {b, d}</td>
+                            <td style="padding: 5px;">B = {b, c}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 5px;">C = {c, &}</td>
+                            <td style="padding: 5px;">C = {d}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3>Tabela de Parsing (Gramática)</h3>
+                <table id="parsingTable">
                     <thead>
                         <tr>
-                            <th>Passo</th>
-                            <th>Pilha</th>
-                            <th>Entrada Restante</th>
-                            <th>Produção Aplicada / Ação</th>
+                            <th>#</th>
+                            <th data-terminal="a">a</th>
+                            <th data-terminal="b">b</th>
+                            <th data-terminal="c">c</th>
+                            <th data-terminal="d">d</th>
+                            <th data-terminal="$">$</th>
                         </tr>
                     </thead>
-                    <tbody id="historyBody">
-                        </tbody>
+                    <tbody>
+                        <tr data-nonterminal="S">
+                            <td>S</td>
+                            <td data-prod="S->aAb">S→aAb</td>
+                            <td data-prod="S->Bb">S→Bb</td>
+                            <td data-prod="-">-</td>
+                            <td data-prod="S->Bb">S→Bb</td>
+                            <td data-prod="-">-</td>
+                        </tr>
+                        <tr data-nonterminal="A">
+                            <td>A</td>
+                            <td data-prod="A->aCd">A→aCd</td>
+                            <td data-prod="-">-</td>
+                            <td data-prod="A->cBc">A→cBc</td>
+                            <td data-prod="A->dS">A→dS</td>
+                            <td data-prod="-">-</td>
+                        </tr>
+                        <tr data-nonterminal="B">
+                            <td>B</td>
+                            <td data-prod="-">-</td>
+                            <td data-prod="B->bAS">B→bAS</td>
+                            <td data-prod="-">-</td>
+                            <td data-prod="B->dA">B→dA</td>
+                            <td data-prod="-">-</td>
+                        </tr>
+                        <tr data-nonterminal="C">
+                            <td>C</td>
+                            <td data-prod="-">-</td>
+                            <td data-prod="-">-</td>
+                            <td data-prod="C->cS">C→cS</td>
+                            <td data-prod="C->&" title="Epsilon (String vazia)" class="epsilon-label">C→&</td>
+                            <td data-prod="-">-</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
+
+            <div class="history-container">
+                <h3>Passos da Análise (Histórico)</h3>
+                <div id="historyScrollContainer">
+                    <table id="historyTable">
+                        <thead>
+                            <tr>
+                                <th>Passo</th>
+                                <th>Pilha</th>
+                                <th>Entrada Restante</th>
+                                <th>Produção Aplicada / Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
-        
+
     </div>
 
-</div>
+    <script>
+        // ----------------------------------------------------
+        // Variáveis e Tabela de Parsing (Geral)
+        // ----------------------------------------------------
 
-<script>
-    // ----------------------------------------------------
-    // Variáveis e Tabela de Parsing (Geral)
-    // ----------------------------------------------------
-
-    const TABELA_PARSING = {
-        'S': { 'a': 'aAb', 'b': 'Bb', 'c': '-', 'd': 'Bb', '$': '-' },
-        'A': { 'a': 'aCd', 'b': '-', 'c': 'cBc', 'd': 'dS', '$': '-' },
-        'B': { 'a': '-', 'b': 'bAS', 'c': '-', 'd': 'dA', '$': '-' },
-        'C': { 'a': '-', 'b': '-', 'c': 'cS', 'd': '&', '$': '-' }, // '&' é (epsilon)
-    };
-
-    const TERMINAIS = ['a', 'b', 'c', 'd', '$'];
-    const NAO_TERMINAIS = ['S', 'A', 'B', 'C'];
-    const EPSILON = '&';
-
-    //L[ogica gerador de senten;as
-
-    const inputNT = document.getElementById('ntDerivation');
-    const inputTerminal = document.getElementById('terminalDerivation');
-    const btnDerivar = document.getElementById('btnDerive');
-    const btnDeriveReset = document.getElementById('btnDeriveReset');
-    const spanDerivacaoAtual = document.getElementById('currentDerivation');
-    const listaDerivacao = document.getElementById('derivationList');
-    const divDerivacaoSaida = document.getElementById('derivationOutput');
-    
-    let estadoDerivacao = 'S';
-    let passosDerivacao = [];
-    let isDerivacaoCompleta = false;
-
-
-    function encontrarPrimeiroNT(nt) {
-        let index = -1;
-        
-        for (const char of estadoDerivacao) {
-            if (NAO_TERMINAIS.includes(char)) {
-                if (char === nt) {
-                    index = estadoDerivacao.indexOf(nt);
-                    break;
-                }
-                alert(`AVISO: A expansão de NTs deve seguir a ordem Left-Most. O próximo NT encontrado é "${char}", mas você tentou expandir "${nt}".`);
-                return null;
-            }
-        }
-        
-        if (index !== -1) {
-            return { start: index, end: index + nt.length };
-        }
-        alert(`Erro: O Não-Terminal "${nt}" não foi encontrado na derivação atual.`);
-        return null;
-    }
-
-    function reiniciarDerivacao() {
-        estadoDerivacao = 'S';
-        passosDerivacao = [];
-        spanDerivacaoAtual.textContent = 'S';
-        listaDerivacao.innerHTML = '';
-        isDerivacaoCompleta = false;
-        
-        inputNT.value = 'S';
-        inputTerminal.value = '';
-        
-        btnDerivar.disabled = false;
-        divDerivacaoSaida.className = 'results';
-        divDerivacaoSaida.style.backgroundColor = '#fff3e0';
-        divDerivacaoSaida.innerHTML = '<strong>Derivação Atual:</strong> <span id="currentDerivation">S</span>';
-        document.getElementById('currentDerivation').textContent = 'S';
-        
-        document.getElementById('inputSentence').value = ''; 
-        document.getElementById('output').textContent = 'Aguardando a sentença...';
-        document.getElementById('output').className = 'results';
-
-        corpoHistorico.innerHTML = '';
-        passos = [];
-        indicePassoAtual = -1;
-        limparDestaquesParsing();
-        atualizarBotoesParsing();
-        
-        listaDerivacao.scrollTop = 0;
-    }
-
-    function aplicarProducao(e) {
-        e.preventDefault(); 
-        if (isDerivacaoCompleta) return;
-
-        const nt = inputNT.value.trim().toUpperCase();
-        const terminal = inputTerminal.value.trim().toLowerCase();
-        
-        if (!NAO_TERMINAIS.includes(nt)) {
-            alert("Erro: O símbolo deve ser um Não-Terminal válido (S, A, B, C).");
-            return;
-        }
-        
-        const localizacaoNT = encontrarPrimeiroNT(nt);
-        if (!localizacaoNT) { return; }
-
-        const { start, end } = localizacaoNT;
-        let terminalFinal = terminal;
-
-        if (!terminalFinal) {
-            let lookaheadIndex = end;
-            while (lookaheadIndex < estadoDerivacao.length && NAO_TERMINAIS.includes(estadoDerivacao[lookaheadIndex])) {
-                lookaheadIndex++; 
-            }
-            
-            if (lookaheadIndex < estadoDerivacao.length) {
-                terminalFinal = estadoDerivacao[lookaheadIndex];
-            } else {
-                terminalFinal = '$'; 
-            }
-        }
-        
-        if (!TERMINAIS.includes(terminalFinal)) {
-             alert(`Erro: O Terminal "${terminalFinal}" não é válido (a, b, c, d, $).`);
-             return;
-        }
-        
-        const producao = (TABELA_PARSING[nt] || {})[terminalFinal] || '-';
-
-        if (producao === '-') {
-            alert(`ERRO: Não há produção válida para (${nt}, ${terminalFinal}). Derivação interrompida.`);
-            divDerivacaoSaida.className = 'results output-error';
-            btnDerivar.disabled = true;
-            isDerivacaoCompleta = true;
-            return;
-        }
-
-        let novaDerivacao = '';
-        novaDerivacao += estadoDerivacao.substring(0, start);
-        const sub = producao === EPSILON ? 'ε' : producao;
-        novaDerivacao += sub;
-        novaDerivacao += estadoDerivacao.substring(end);
-        
-        estadoDerivacao = novaDerivacao;
-        passosDerivacao.push({
-            acao: `${nt} → ${sub.replace(/&/g, 'ε')}`,
-            terminal: terminalFinal,
-            resultado: estadoDerivacao.replace(/ε/g, '')
-        });
-        
-        spanDerivacaoAtual.textContent = estadoDerivacao.replace(/ε/g, '');
-
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>${nt} → ${sub.replace(/&/g, 'ε')}</strong>: ${estadoDerivacao.replace(/ε/g, '')}`;
-        listaDerivacao.appendChild(li);
-
-        listaDerivacao.scrollTop = listaDerivacao.scrollHeight;
-
-
-        let proximoNT = '';
-        let isFinished = true;
-        
-        for (const char of estadoDerivacao) {
-            if (NAO_TERMINAIS.includes(char)) {
-                proximoNT = char;
-                isFinished = false;
-                break;
-            }
-        }
-
-        if (isFinished) {
-            isDerivacaoCompleta = true;
-            const sentencaGerada = estadoDerivacao.replace(/ε/g, '');
-            divDerivacaoSaida.className = 'results output-success';
-            spanDerivacaoAtual.textContent = sentencaGerada;
-            divDerivacaoSaida.innerHTML = `✅ **SENTENÇA GERADA:** ${sentencaGerada} (em ${passosDerivacao.length} passos)`;
-            btnDerivar.disabled = true;
-            
-            conectarDerivacaoComParsing(sentencaGerada);
-            
-        } else {
-            inputNT.value = proximoNT;
-            inputTerminal.value = ''; 
-        }
-    }
-
-    function conectarDerivacaoComParsing(sentencaGerada) {
-        const inputSentenca = document.getElementById('inputSentence');
-        inputSentenca.value = sentencaGerada;
-        
-        document.getElementById('output').textContent = 'Sentença copiada! Clique em "Próximo →" para iniciar a análise.';
-        document.getElementById('output').className = 'results';
-        
-        atualizarBotoesParsing();
-    }
-
-    btnDerivar.addEventListener('click', aplicarProducao);
-    btnDeriveReset.addEventListener('click', (e) => {
-        e.preventDefault();
-        reiniciarDerivacao();
-    });
-
-
-    //L[ogica Analisador de Senten;as
-
-    let sentenca = '';
-    let passos = []; 
-    let indicePassoAtual = -1; 
-    let isGerandoAutomaticamente = false;
-    
-    const inputSentenca = document.getElementById('inputSentence');
-    const btnProximo = document.getElementById('btnNext');
-    const btnVoltar = document.getElementById('btnBack');
-    const btnGerar = document.getElementById('btnGenerate');
-    const divSaida = document.getElementById('output');
-    const corpoHistorico = document.getElementById('historyBody');
-    const tabelaParsingElemento = document.getElementById('parsingTable');
-    const historyScrollContainer = document.getElementById('historyScrollContainer'); 
-    
-     // Reseta e pré-calcula todos os passos de análise.
-    function precalcularPassos() {
-        const input = inputSentenca.value.trim().toLowerCase();
-        
-        if (input.length === 0) {
-            alert("Por favor, gere ou digite uma sentença válida antes de iniciar.");
-            return false;
-        }
-
-        sentenca = input.slice(-1) !== '$' ? input + '$' : input;
-
-        // Configuração Inicial
-        const passoZero = {
-            pilha: ['$', 'S'],
-            entrada: Array.from(sentenca),
-            acao: 'Configuração Inicial',
-            status: 'neutro',
-            naoTerminal: null,
-            terminal: null,
-            producao: null
+        const TABELA_PARSING = {
+            'S': { 'a': 'aAb', 'b': 'Bb', 'c': '-', 'd': 'Bb', '$': '-' },
+            'A': { 'a': 'aCd', 'b': '-', 'c': 'cBc', 'd': 'dS', '$': '-' },
+            'B': { 'a': '-', 'b': 'bAS', 'c': '-', 'd': 'dA', '$': '-' },
+            'C': { 'a': '-', 'b': '-', 'c': 'cS', 'd': '&', '$': '-' }, // '&' é (epsilon)
         };
 
-        //Geração de TODOS os passos a partir do Passo 1 (movimento)
-        passos = [passoZero];
-        
-        let atual = passoZero;
-        let i = 1; 
-        const maximoPassos = 1000; 
+        const TERMINAIS = ['a', 'b', 'c', 'd', '$'];
+        const NAO_TERMINAIS = ['S', 'A', 'B', 'C'];
+        const EPSILON = '&';
 
-        while (atual.status !== 'aceita' && atual.status !== 'erro' && i < maximoPassos) {
-            const proximo = executarProximoPasso(atual);
-            passos.push(proximo);
-            atual = proximo;
-            i++;
-        }
+        //L[ogica gerador de senten;as
 
-        if (i >= maximoPassos) {
-            passos[passos.length - 1].acao = 'ERRO: Loop Infinito Detectado ou Limite Excedido';
-            passos[passos.length - 1].status = 'erro';
-        }
-        
-        indicePassoAtual = 0;
-        corpoHistorico.innerHTML = ''; 
-        limparDestaquesParsing();
-        divSaida.textContent = `Análise pré-calculada: ${passos.length - 1} movimentos possíveis.`;
-        divSaida.className = 'results';
-        
-        return true;
-    }
-    
-    function executarProximoPasso(estado) {
-        let { pilha, entrada } = estado;
-        
-        const novaPilha = [...pilha];
-        const novaEntrada = [...entrada];
-        let acao = '';
-        let status = 'processando';
-        let naoTerminal = null;
-        let terminal = null;
-        let producao = null;
+        const inputNT = document.getElementById('ntDerivation');
+        const inputTerminal = document.getElementById('terminalDerivation');
+        const btnDerivar = document.getElementById('btnDerive');
+        const btnDeriveReset = document.getElementById('btnDeriveReset');
+        const spanDerivacaoAtual = document.getElementById('currentDerivation');
+        const listaDerivacao = document.getElementById('derivationList');
+        const divDerivacaoSaida = document.getElementById('derivationOutput');
 
-        const topo = novaPilha[novaPilha.length - 1]; 
-        const lookahead = novaEntrada[0];
+        let estadoDerivacao = 'S';
+        let passosDerivacao = [];
+        let isDerivacaoCompleta = false;
 
-        if (topo === '$' && lookahead === '$') {
-            acao = 'Aceita (Fim de Entrada)';
-            status = 'aceita';
-            return { pilha: novaPilha, entrada: novaEntrada, acao, status, naoTerminal, terminal, producao };
-        }
-        
-        if (!topo || !lookahead) {
-            acao = 'ERRO: Fim prematuro da Pilha ou Entrada';
-            status = 'erro';
-            return { pilha: novaPilha, entrada: novaEntrada, acao, status, naoTerminal, terminal, producao };
-        }
 
-        //Topo é um Terminal
-        if (TERMINAIS.includes(topo)) {
-            if (topo === lookahead) {
-                novaPilha.pop(); 
-                novaEntrada.shift(); 
-                acao = `Ler: ${topo}`; 
-                status = 'match';
-            } else {
-                acao = `ERRO: Terminal "${topo}" esperado, mas encontrado "${lookahead}"`;
-                status = 'erro';
-            }
-        }
-        //Topo é um Não-Terminal
-        else if (NAO_TERMINAIS.includes(topo)) {
-            naoTerminal = topo;
-            terminal = lookahead;
-            
-            producao = (TABELA_PARSING[naoTerminal] || {})[terminal] || '-';
+        function encontrarPrimeiroNT(nt) {
+            let index = -1;
 
-            if (producao && producao !== '-') {
-                novaPilha.pop(); 
-                acao = `Produção: ${naoTerminal} → ${producao.replace(/&/g, 'ε')}`;
-
-                if (producao !== EPSILON) {
-                    const simbolos = Array.from(producao).reverse();
-                    novaPilha.push(...simbolos);
+            for (const char of estadoDerivacao) {
+                if (NAO_TERMINAIS.includes(char)) {
+                    if (char === nt) {
+                        index = estadoDerivacao.indexOf(nt);
+                        break;
+                    }
+                    alert(`AVISO: A expansão de NTs deve seguir a ordem Left-Most. O próximo NT encontrado é "${char}", mas você tentou expandir "${nt}".`);
+                    return null;
                 }
-                status = 'producao';
-            } else {
-                acao = `ERRO: Não há regra para (${naoTerminal}, ${terminal})`;
-                status = 'erro';
             }
-        }
-        else {
-             acao = `ERRO: Símbolo desconhecido no topo da pilha: ${topo}`;
-             status = 'erro';
+
+            if (index !== -1) {
+                return { start: index, end: index + nt.length };
+            }
+            alert(`Erro: O Não-Terminal "${nt}" não foi encontrado na derivação atual.`);
+            return null;
         }
 
-        return { pilha: novaPilha, entrada: novaEntrada, acao, status, naoTerminal, terminal, producao };
-    }
-    //Smilacao passo a passo
-     // Avança a simulacao
-    function avancarSimulacao() {
-        if (passos.length === 0) {
-            if (!precalcularPassos()) {
+        function reiniciarDerivacao() {
+            estadoDerivacao = 'S';
+            passosDerivacao = [];
+            spanDerivacaoAtual.textContent = 'S';
+            listaDerivacao.innerHTML = '';
+            isDerivacaoCompleta = false;
+
+            inputNT.value = 'S';
+            inputTerminal.value = '';
+
+            btnDerivar.disabled = false;
+            divDerivacaoSaida.className = 'results';
+            divDerivacaoSaida.style.backgroundColor = '#fff3e0';
+            divDerivacaoSaida.innerHTML = '<strong>Derivação Atual:</strong> <span id="currentDerivation">S</span>';
+            document.getElementById('currentDerivation').textContent = 'S';
+
+            document.getElementById('inputSentence').value = '';
+            document.getElementById('output').textContent = 'Aguardando a sentença...';
+            document.getElementById('output').className = 'results';
+
+            corpoHistorico.innerHTML = '';
+            passos = [];
+            indicePassoAtual = -1;
+            limparDestaquesParsing();
+            atualizarBotoesParsing();
+
+            listaDerivacao.scrollTop = 0;
+        }
+
+        function aplicarProducao(e) {
+            e.preventDefault();
+            if (isDerivacaoCompleta) return;
+
+            const nt = inputNT.value.trim().toUpperCase();
+            const terminal = inputTerminal.value.trim().toLowerCase();
+
+            if (!NAO_TERMINAIS.includes(nt)) {
+                alert("Erro: O símbolo deve ser um Não-Terminal válido (S, A, B, C).");
                 return;
             }
-        }
-        
-        if (indicePassoAtual < passos.length - 1) {
-            indicePassoAtual++;
-            atualizarExibicaoParsing();
-        }
-    }
-    
-    
-    //Retorna a simula;áo um passo pra tr[as
-    function retrocederSimulacao() {
-        if (indicePassoAtual > 1) { 
-            indicePassoAtual--;
-            atualizarExibicaoParsing();
-        }
-    }
 
-    //Gera a simula;áo em um Clique
-    async function gerarTudoAutomaticamente() {
-        if (isGerandoAutomaticamente) return;
-        
-        if (passos.length === 0 && !precalcularPassos()) {
-             return;
-        }
+            const localizacaoNT = encontrarPrimeiroNT(nt);
+            if (!localizacaoNT) { return; }
 
-        isGerandoAutomaticamente = true;
-        
-        btnProximo.disabled = true;
-        btnVoltar.disabled = true;
-        btnGerar.disabled = true;
+            const { start, end } = localizacaoNT;
+            let terminalFinal = terminal;
 
-        const passoFinal = passos.length - 1;
-        
-        for (let i = indicePassoAtual + 1; i <= passoFinal; i++) {
-            indicePassoAtual = i;
-            atualizarExibicaoParsing();
-            
-            if (i < passoFinal) {
-                await new Promise(resolve => setTimeout(resolve, 50)); 
+            if (!terminalFinal) {
+                let lookaheadIndex = end;
+                while (lookaheadIndex < estadoDerivacao.length && NAO_TERMINAIS.includes(estadoDerivacao[lookaheadIndex])) {
+                    lookaheadIndex++;
+                }
+
+                if (lookaheadIndex < estadoDerivacao.length) {
+                    terminalFinal = estadoDerivacao[lookaheadIndex];
+                } else {
+                    terminalFinal = '$';
+                }
             }
-            
-            const passoAtual = passos[indicePassoAtual];
-             if (passoAtual.status === 'erro' || passoAtual.status === 'aceita') {
-                 break;
-             }
+
+            if (!TERMINAIS.includes(terminalFinal)) {
+                alert(`Erro: O Terminal "${terminalFinal}" não é válido (a, b, c, d, $).`);
+                return;
+            }
+
+            const producao = (TABELA_PARSING[nt] || {})[terminalFinal] || '-';
+
+            if (producao === '-') {
+                alert(`ERRO: Não há produção válida para (${nt}, ${terminalFinal}). Derivação interrompida.`);
+                divDerivacaoSaida.className = 'results output-error';
+                btnDerivar.disabled = true;
+                isDerivacaoCompleta = true;
+                return;
+            }
+
+            let novaDerivacao = '';
+            novaDerivacao += estadoDerivacao.substring(0, start);
+            const sub = producao === EPSILON ? 'ε' : producao;
+            novaDerivacao += sub;
+            novaDerivacao += estadoDerivacao.substring(end);
+
+            estadoDerivacao = novaDerivacao;
+            passosDerivacao.push({
+                acao: `${nt} → ${sub.replace(/&/g, 'ε')}`,
+                terminal: terminalFinal,
+                resultado: estadoDerivacao.replace(/ε/g, '')
+            });
+
+            spanDerivacaoAtual.textContent = estadoDerivacao.replace(/ε/g, '');
+
+            const li = document.createElement('li');
+            li.innerHTML = `<strong>${nt} → ${sub.replace(/&/g, 'ε')}</strong>: ${estadoDerivacao.replace(/ε/g, '')}`;
+            listaDerivacao.appendChild(li);
+
+            listaDerivacao.scrollTop = listaDerivacao.scrollHeight;
+
+
+            let proximoNT = '';
+            let isFinished = true;
+
+            for (const char of estadoDerivacao) {
+                if (NAO_TERMINAIS.includes(char)) {
+                    proximoNT = char;
+                    isFinished = false;
+                    break;
+                }
+            }
+
+            if (isFinished) {
+                isDerivacaoCompleta = true;
+                const sentencaGerada = estadoDerivacao.replace(/ε/g, '');
+                divDerivacaoSaida.className = 'results output-success';
+                spanDerivacaoAtual.textContent = sentencaGerada;
+                divDerivacaoSaida.innerHTML = `✅ **SENTENÇA GERADA:** ${sentencaGerada} (em ${passosDerivacao.length} passos)`;
+                btnDerivar.disabled = true;
+
+                conectarDerivacaoComParsing(sentencaGerada);
+
+            } else {
+                inputNT.value = proximoNT;
+                inputTerminal.value = '';
+            }
         }
 
-        isGerandoAutomaticamente = false;
-        atualizarBotoesParsing();
-    }
+        function conectarDerivacaoComParsing(sentencaGerada) {
+            const inputSentenca = document.getElementById('inputSentence');
+            inputSentenca.value = sentencaGerada;
+
+            document.getElementById('output').textContent = 'Sentença copiada! Clique em "Próximo →" para iniciar a análise.';
+            document.getElementById('output').className = 'results';
+
+            atualizarBotoesParsing();
+        }
+
+        btnDerivar.addEventListener('click', aplicarProducao);
+        btnDeriveReset.addEventListener('click', (e) => {
+            e.preventDefault();
+            reiniciarDerivacao();
+        });
 
 
-    function atualizarBotoesParsing() {
-        const totalPassosExecutados = passos.length - 1;
-        
-        btnProximo.disabled = isGerandoAutomaticamente || (passos.length > 0 && indicePassoAtual >= totalPassosExecutados);
-        btnVoltar.disabled = isGerandoAutomaticamente || indicePassoAtual <= 1;
-        btnGerar.disabled = isGerandoAutomaticamente || (passos.length > 0 && indicePassoAtual >= totalPassosExecutados);
+        //L[ogica Analisador de Senten;as
 
-        if (inputSentenca.value.trim().length === 0) {
-            btnProximo.disabled = false;
+        let sentenca = '';
+        let passos = [];
+        let indicePassoAtual = -1;
+        let isGerandoAutomaticamente = false;
+
+        const inputSentenca = document.getElementById('inputSentence');
+        const btnProximo = document.getElementById('btnNext');
+        const btnVoltar = document.getElementById('btnBack');
+        const btnGerar = document.getElementById('btnGenerate');
+        const divSaida = document.getElementById('output');
+        const corpoHistorico = document.getElementById('historyBody');
+        const tabelaParsingElemento = document.getElementById('parsingTable');
+        const historyScrollContainer = document.getElementById('historyScrollContainer');
+
+        // Reseta e pré-calcula todos os passos de análise.
+        function precalcularPassos() {
+            const input = inputSentenca.value.trim().toLowerCase();
+
+            if (input.length === 0) {
+                alert("Por favor, gere ou digite uma sentença válida antes de iniciar.");
+                return false;
+            }
+
+            sentenca = input.slice(-1) !== '$' ? input + '$' : input;
+
+            // Configuração Inicial
+            const passoZero = {
+                pilha: ['$', 'S'],
+                entrada: Array.from(sentenca),
+                acao: 'Configuração Inicial',
+                status: 'neutro',
+                naoTerminal: null,
+                terminal: null,
+                producao: null
+            };
+
+            //Geração de TODOS os passos a partir do Passo 1 (movimento)
+            passos = [passoZero];
+
+            let atual = passoZero;
+            let i = 1;
+            const maximoPassos = 1000;
+
+            while (atual.status !== 'aceita' && atual.status !== 'erro' && i < maximoPassos) {
+                const proximo = executarProximoPasso(atual);
+                passos.push(proximo);
+                atual = proximo;
+                i++;
+            }
+
+            if (i >= maximoPassos) {
+                passos[passos.length - 1].acao = 'ERRO: Loop Infinito Detectado ou Limite Excedido';
+                passos[passos.length - 1].status = 'erro';
+            }
+
+            indicePassoAtual = 0;
+            corpoHistorico.innerHTML = '';
+            limparDestaquesParsing();
+            divSaida.textContent = `Análise pré-calculada: ${passos.length - 1} movimentos possíveis.`;
+            divSaida.className = 'results';
+
+            return true;
+        }
+
+        function executarProximoPasso(estado) {
+            let { pilha, entrada } = estado;
+
+            const novaPilha = [...pilha];
+            const novaEntrada = [...entrada];
+            let acao = '';
+            let status = 'processando';
+            let naoTerminal = null;
+            let terminal = null;
+            let producao = null;
+
+            const topo = novaPilha[novaPilha.length - 1];
+            const lookahead = novaEntrada[0];
+
+            if (topo === '$' && lookahead === '$') {
+                acao = 'Aceita (Fim de Entrada)';
+                status = 'aceita';
+                return { pilha: novaPilha, entrada: novaEntrada, acao, status, naoTerminal, terminal, producao };
+            }
+
+            if (!topo || !lookahead) {
+                acao = 'ERRO: Fim prematuro da Pilha ou Entrada';
+                status = 'erro';
+                return { pilha: novaPilha, entrada: novaEntrada, acao, status, naoTerminal, terminal, producao };
+            }
+
+            //Topo é um Terminal
+            if (TERMINAIS.includes(topo)) {
+                if (topo === lookahead) {
+                    novaPilha.pop();
+                    novaEntrada.shift();
+                    acao = `Ler: ${topo}`;
+                    status = 'match';
+                } else {
+                    acao = `ERRO: Terminal "${topo}" esperado, mas encontrado "${lookahead}"`;
+                    status = 'erro';
+                }
+            }
+            //Topo é um Não-Terminal
+            else if (NAO_TERMINAIS.includes(topo)) {
+                naoTerminal = topo;
+                terminal = lookahead;
+
+                producao = (TABELA_PARSING[naoTerminal] || {})[terminal] || '-';
+
+                if (producao && producao !== '-') {
+                    novaPilha.pop();
+                    acao = `Produção: ${naoTerminal} → ${producao.replace(/&/g, 'ε')}`;
+
+                    if (producao !== EPSILON) {
+                        const simbolos = Array.from(producao).reverse();
+                        novaPilha.push(...simbolos);
+                    }
+                    status = 'producao';
+                } else {
+                    acao = `ERRO: Não há regra para (${naoTerminal}, ${terminal})`;
+                    status = 'erro';
+                }
+            }
+            else {
+                acao = `ERRO: Símbolo desconhecido no topo da pilha: ${topo}`;
+                status = 'erro';
+            }
+
+            return { pilha: novaPilha, entrada: novaEntrada, acao, status, naoTerminal, terminal, producao };
+        }
+        //Smilacao passo a passo
+        // Avança a simulacao
+        function avancarSimulacao() {
+            if (passos.length === 0) {
+                if (!precalcularPassos()) {
+                    return;
+                }
+            }
+
+            if (indicePassoAtual < passos.length - 1) {
+                indicePassoAtual++;
+                atualizarExibicaoParsing();
+            }
+        }
+
+
+        //Retorna a simula;áo um passo pra tr[as
+        function retrocederSimulacao() {
+            if (indicePassoAtual > 1) {
+                indicePassoAtual--;
+                atualizarExibicaoParsing();
+            }
+        }
+
+        //Gera a simula;áo em um Clique
+        async function gerarTudoAutomaticamente() {
+            if (isGerandoAutomaticamente) return;
+
+            if (passos.length === 0 && !precalcularPassos()) {
+                return;
+            }
+
+            isGerandoAutomaticamente = true;
+
+            btnProximo.disabled = true;
             btnVoltar.disabled = true;
             btnGerar.disabled = true;
-        }
-    }
 
+            const passoFinal = passos.length - 1;
 
-    function atualizarExibicaoParsing() {
-        limparDestaquesParsing();
-        renderizarTabelaHistoricoParsing();
-        atualizarBotoesParsing();
-        
-        const totalPassosExecutados = passos.length - 1; 
+            for (let i = indicePassoAtual + 1; i <= passoFinal; i++) {
+                indicePassoAtual = i;
+                atualizarExibicaoParsing();
 
-        if (indicePassoAtual > 0 && indicePassoAtual < passos.length) {
-            const passoAtual = passos[indicePassoAtual];
-            
-            if (passoAtual.naoTerminal && passoAtual.terminal) {
-                destacarTabelaParsing(passoAtual.naoTerminal, passoAtual.terminal, passoAtual.status);
-            }
-
-            const passoExibido = indicePassoAtual;
-
-            if (passoAtual.status === 'aceita') {
-                divSaida.textContent = `✅ ACEITA! A sentença foi reconhecida em ${totalPassosExecutados} passos.`;
-                divSaida.className = 'results output-success';
-            } else if (passoAtual.status === 'erro') {
-                divSaida.textContent = `❌ REJEITADA! Erro no passo ${passoExibido}. Motivo: ${passoAtual.acao}`;
-                divSaida.className = 'results output-error';
-            } else {
-                 divSaida.textContent = `Ação: ${passoAtual.acao.replace(/&/g, 'ε')} | Passo: ${passoExibido}/${totalPassosExecutados}`;
-                 divSaida.className = 'results';
-            }
-        } else if (indicePassoAtual === 0 && passos.length > 0) {
-            divSaida.textContent = `Configuração Inicial. Próximo passo: 1/${totalPassosExecutados}`;
-            divSaida.className = 'results';
-        } else {
-            divSaida.textContent = 'Aguardando a sentença...';
-            divSaida.className = 'results';
-        }
-    }
-
-
-    function destacarTabelaParsing(naoTerminal, terminal, status) {
-        const linha = tabelaParsingElemento.querySelector(`tr[data-nonterminal="${naoTerminal}"]`);
-        if (linha) {
-            const cabecalhos = tabelaParsingElemento.querySelectorAll('thead th');
-            let indiceColuna = -1;
-            
-            cabecalhos.forEach((th, index) => {
-                if (th.getAttribute('data-terminal') === terminal) {
-                    indiceColuna = index;
+                if (i < passoFinal) {
+                    await new Promise(resolve => setTimeout(resolve, 50));
                 }
-            });
-            
-            if (indiceColuna !== -1) {
-                const celula = linha.children[indiceColuna];
-                if (celula) {
-                    if (status === 'producao' || status === 'match') {
-                        celula.classList.add('highlight-success');
-                    } else if (status === 'erro') {
-                        celula.classList.add('highlight-error');
+
+                const passoAtual = passos[indicePassoAtual];
+                if (passoAtual.status === 'erro' || passoAtual.status === 'aceita') {
+                    break;
+                }
+            }
+
+            isGerandoAutomaticamente = false;
+            atualizarBotoesParsing();
+        }
+
+
+        function atualizarBotoesParsing() {
+            const totalPassosExecutados = passos.length - 1;
+
+            btnProximo.disabled = isGerandoAutomaticamente || (passos.length > 0 && indicePassoAtual >= totalPassosExecutados);
+            btnVoltar.disabled = isGerandoAutomaticamente || indicePassoAtual <= 1;
+            btnGerar.disabled = isGerandoAutomaticamente || (passos.length > 0 && indicePassoAtual >= totalPassosExecutados);
+
+            if (inputSentenca.value.trim().length === 0) {
+                btnProximo.disabled = false;
+                btnVoltar.disabled = true;
+                btnGerar.disabled = true;
+            }
+        }
+
+
+        function atualizarExibicaoParsing() {
+            limparDestaquesParsing();
+            renderizarTabelaHistoricoParsing();
+            atualizarBotoesParsing();
+
+            const totalPassosExecutados = passos.length - 1;
+
+            if (indicePassoAtual > 0 && indicePassoAtual < passos.length) {
+                const passoAtual = passos[indicePassoAtual];
+
+                if (passoAtual.naoTerminal && passoAtual.terminal) {
+                    destacarTabelaParsing(passoAtual.naoTerminal, passoAtual.terminal, passoAtual.status);
+                }
+
+                const passoExibido = indicePassoAtual;
+
+                if (passoAtual.status === 'aceita') {
+                    divSaida.textContent = `✅ ACEITA! A sentença foi reconhecida em ${totalPassosExecutados} passos.`;
+                    divSaida.className = 'results output-success';
+                } else if (passoAtual.status === 'erro') {
+                    divSaida.textContent = `❌ REJEITADA! Erro no passo ${passoExibido}. Motivo: ${passoAtual.acao}`;
+                    divSaida.className = 'results output-error';
+                } else {
+                    divSaida.textContent = `Ação: ${passoAtual.acao.replace(/&/g, 'ε')} | Passo: ${passoExibido}/${totalPassosExecutados}`;
+                    divSaida.className = 'results';
+                }
+            } else if (indicePassoAtual === 0 && passos.length > 0) {
+                divSaida.textContent = `Configuração Inicial. Próximo passo: 1/${totalPassosExecutados}`;
+                divSaida.className = 'results';
+            } else {
+                divSaida.textContent = 'Aguardando a sentença...';
+                divSaida.className = 'results';
+            }
+        }
+
+
+        function destacarTabelaParsing(naoTerminal, terminal, status) {
+            const linha = tabelaParsingElemento.querySelector(`tr[data-nonterminal="${naoTerminal}"]`);
+            if (linha) {
+                const cabecalhos = tabelaParsingElemento.querySelectorAll('thead th');
+                let indiceColuna = -1;
+
+                cabecalhos.forEach((th, index) => {
+                    if (th.getAttribute('data-terminal') === terminal) {
+                        indiceColuna = index;
+                    }
+                });
+
+                if (indiceColuna !== -1) {
+                    const celula = linha.children[indiceColuna];
+                    if (celula) {
+                        if (status === 'producao' || status === 'match') {
+                            celula.classList.add('highlight-success');
+                        } else if (status === 'erro') {
+                            celula.classList.add('highlight-error');
+                        }
                     }
                 }
             }
         }
-    }
 
-    function limparDestaquesParsing() {
-        document.querySelectorAll('#parsingTable td').forEach(td => {
-            td.classList.remove('highlight-success', 'highlight-error');
-        });
-    }
-
-    function renderizarTabelaHistoricoParsing() {
-        corpoHistorico.innerHTML = '';
-        
-        for (let index = 1; index <= indicePassoAtual && index < passos.length; index++) {
-            const passo = passos[index];
-            const tr = document.createElement('tr');
-            
-            if (index === indicePassoAtual) {
-                tr.classList.add('current-step');
-            }
-            
-            const passoTd = document.createElement('td');
-            const pilhaTd = document.createElement('td');
-            const entradaTd = document.createElement('td');
-            const acaoTd = document.createElement('td');
-
-            const estadoAnterior = passos[index - 1];
-            pilhaTd.textContent = estadoAnterior.pilha.join('');
-            entradaTd.textContent = estadoAnterior.entrada.join('');
-
-            passoTd.textContent = index;
-            acaoTd.textContent = passo.acao.replace(/&/g, 'ε');
-
-            tr.appendChild(passoTd);
-            tr.appendChild(pilhaTd);
-            tr.appendChild(entradaTd);
-            tr.appendChild(acaoTd);
-            corpoHistorico.appendChild(tr);
+        function limparDestaquesParsing() {
+            document.querySelectorAll('#parsingTable td').forEach(td => {
+                td.classList.remove('highlight-success', 'highlight-error');
+            });
         }
-        
-        historyScrollContainer.scrollTop = historyScrollContainer.scrollHeight;
-    }
 
-    // Eventos (Parsing)
+        function renderizarTabelaHistoricoParsing() {
+            corpoHistorico.innerHTML = '';
 
-    btnProximo.addEventListener('click', (e) => {
-        e.preventDefault(); 
-        avancarSimulacao();
-    });
+            for (let index = 1; index <= indicePassoAtual && index < passos.length; index++) {
+                const passo = passos[index];
+                const tr = document.createElement('tr');
 
-    btnVoltar.addEventListener('click', (e) => {
-        e.preventDefault(); 
-        retrocederSimulacao();
-    });
+                if (index === indicePassoAtual) {
+                    tr.classList.add('current-step');
+                }
 
-    btnGerar.addEventListener('click', async (e) => {
-        e.preventDefault(); 
-        await gerarTudoAutomaticamente();
-    });
-    
-    // Inicialização
-    document.addEventListener('DOMContentLoaded', () => {
-        // Inicializa o simulador
-        reiniciarDerivacao();
-        atualizarExibicaoParsing(); 
-    });
+                const passoTd = document.createElement('td');
+                const pilhaTd = document.createElement('td');
+                const entradaTd = document.createElement('td');
+                const acaoTd = document.createElement('td');
 
-</script>
+                const estadoAnterior = passos[index - 1];
+                pilhaTd.textContent = estadoAnterior.pilha.join('');
+                entradaTd.textContent = estadoAnterior.entrada.join('');
+
+                passoTd.textContent = index;
+                acaoTd.textContent = passo.acao.replace(/&/g, 'ε');
+
+                tr.appendChild(passoTd);
+                tr.appendChild(pilhaTd);
+                tr.appendChild(entradaTd);
+                tr.appendChild(acaoTd);
+                corpoHistorico.appendChild(tr);
+            }
+
+            historyScrollContainer.scrollTop = historyScrollContainer.scrollHeight;
+        }
+
+        // Eventos (Parsing)
+
+        btnProximo.addEventListener('click', (e) => {
+            e.preventDefault();
+            avancarSimulacao();
+        });
+
+        btnVoltar.addEventListener('click', (e) => {
+            e.preventDefault();
+            retrocederSimulacao();
+        });
+
+        btnGerar.addEventListener('click', async (e) => {
+            e.preventDefault();
+            await gerarTudoAutomaticamente();
+        });
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inicializa o simulador
+            reiniciarDerivacao();
+            atualizarExibicaoParsing();
+        });
+
+    </script>
 
 </body>
 
 </html>
-
-
