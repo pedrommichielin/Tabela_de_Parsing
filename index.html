@@ -15,10 +15,6 @@
             --card-bg: #ffffff;
             --text-color: #333;
         }
-
-        /* ------------------------------------------------ */
-        /* --- Scroll do Body Ativado (Default) --- */
-        /* ------------------------------------------------ */
         html, body {
             height: auto; 
             overflow-y: auto; 
@@ -126,7 +122,6 @@
             cursor: not-allowed;
         }
 
-        /* --- Resultados (Geral) --- */
         .results {
             padding: 10px; 
             font-size: 1em;
@@ -146,7 +141,6 @@
             color: white;
         }
 
-        /* --- Derivação (Compacta) --- */
         #derivationOutput {
             background-color: #fff3e0; 
             color: #333; 
@@ -163,7 +157,7 @@
         #derivationHistory ol {
             padding-left: 20px;
             max-height: 100px; 
-            overflow-y: auto; /* Scroll do Histórico de Derivação */
+            overflow-y: auto; 
             border: 1px solid #ccc;
             padding: 5px 20px;
             border-radius: 4px;
@@ -180,15 +174,13 @@
             border-top: 1px solid #ccc;
         }
 
-        /* --- Layout Duas Colunas (Análise) --- */
         .analysis-section {
             display: flex;
             gap: 10px; 
             margin-top: 10px;
             flex-grow: 1; 
             min-height: 300px; 
-            /* MUDANÇA: Definição de altura para que os filhos flexíveis tenham um limite */
-            max-height: 55vh; /* Altura máxima em relação à viewport, ajustável */
+            max-height: 55vh;
         }
         
         .analysis-section > div {
@@ -210,7 +202,6 @@
             order: 2;
         }
 
-        /* --- Tabela de Parsing (Super Compacta) --- */
         #parsingTable {
             width: 100%;
             border-collapse: collapse;
@@ -240,7 +231,6 @@
             background-color: #f9f9f9;
         }
 
-        /* Destaque da Célula */
         .highlight-success {
             background-color: var(--success-color) !important;
             color: white;
@@ -253,12 +243,10 @@
             font-weight: bold;
         }
 
-        /* --- Tabela de Passos (Histórico) --- */
         #historyScrollContainer {
             flex-grow: 1; 
-            /* MUDANÇA: Altura máxima definida para forçar o scroll */
-            max-height: 100%; /* Ocupa 100% da altura do seu pai (.history-container) que agora tem limite */
-            overflow-y: auto; /* Scroll do Histórico de Parsing - Essencial */
+            max-height: 100%;
+            overflow-y: auto;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
@@ -411,16 +399,14 @@
         'S': { 'a': 'aAb', 'b': 'Bb', 'c': '-', 'd': 'Bb', '$': '-' },
         'A': { 'a': 'aCd', 'b': '-', 'c': 'cBc', 'd': 'dS', '$': '-' },
         'B': { 'a': '-', 'b': 'bAS', 'c': '-', 'd': 'dA', '$': '-' },
-        'C': { 'a': '-', 'b': '-', 'c': 'cS', 'd': '&', '$': '-' }, // '&' é a string vazia (epsilon)
+        'C': { 'a': '-', 'b': '-', 'c': 'cS', 'd': '&', '$': '-' }, // '&' é (epsilon)
     };
 
     const TERMINAIS = ['a', 'b', 'c', 'd', '$'];
     const NAO_TERMINAIS = ['S', 'A', 'B', 'C'];
     const EPSILON = '&';
 
-    // ====================================================
-    // 🧮 LÓGICA DO GERADOR DE SENTENÇAS (DERIVADOR)
-    // ====================================================
+    //L[ogica gerador de senten;as
 
     const inputNT = document.getElementById('ntDerivation');
     const inputTerminal = document.getElementById('terminalDerivation');
@@ -472,19 +458,16 @@
         divDerivacaoSaida.innerHTML = '<strong>Derivação Atual:</strong> <span id="currentDerivation">S</span>';
         document.getElementById('currentDerivation').textContent = 'S';
         
-        // Resetar o estado do Analisador
         document.getElementById('inputSentence').value = ''; 
         document.getElementById('output').textContent = 'Aguardando a sentença...';
         document.getElementById('output').className = 'results';
-        
-        // Resetar a tabela de histórico do Analisador
+
         corpoHistorico.innerHTML = '';
         passos = [];
         indicePassoAtual = -1;
         limparDestaquesParsing();
         atualizarBotoesParsing();
         
-        // Scroll do histórico de derivação
         listaDerivacao.scrollTop = 0;
     }
 
@@ -552,8 +535,7 @@
         const li = document.createElement('li');
         li.innerHTML = `<strong>${nt} → ${sub.replace(/&/g, 'ε')}</strong>: ${estadoDerivacao.replace(/ε/g, '')}`;
         listaDerivacao.appendChild(li);
-        
-        // Scroll do histórico de derivação para o final
+
         listaDerivacao.scrollTop = listaDerivacao.scrollHeight;
 
 
@@ -594,11 +576,6 @@
         atualizarBotoesParsing();
     }
 
-
-    // ----------------------------------------------------
-    // Gerenciamento de Eventos (Derivador)
-    // ----------------------------------------------------
-
     btnDerivar.addEventListener('click', aplicarProducao);
     btnDeriveReset.addEventListener('click', (e) => {
         e.preventDefault();
@@ -606,9 +583,7 @@
     });
 
 
-    // ====================================================
-    // 🔍 LÓGICA DO ANALISADOR DE SENTENÇAS (PARSING)
-    // ====================================================
+    //L[ogica Analisador de Senten;as
 
     let sentenca = '';
     let passos = []; 
@@ -623,10 +598,8 @@
     const corpoHistorico = document.getElementById('historyBody');
     const tabelaParsingElemento = document.getElementById('parsingTable');
     const historyScrollContainer = document.getElementById('historyScrollContainer'); 
-
-    /**
-     * Reseta e pré-calcula todos os passos de análise.
-     */
+    
+     // Reseta e pré-calcula todos os passos de análise.
     function precalcularPassos() {
         const input = inputSentenca.value.trim().toLowerCase();
         
@@ -637,7 +610,7 @@
 
         sentenca = input.slice(-1) !== '$' ? input + '$' : input;
 
-        // 1. Passo 0: Configuração Inicial
+        // Configuração Inicial
         const passoZero = {
             pilha: ['$', 'S'],
             entrada: Array.from(sentenca),
@@ -648,7 +621,7 @@
             producao: null
         };
 
-        // 2. Geração de TODOS os passos a partir do Passo 1 (movimento)
+        //Geração de TODOS os passos a partir do Passo 1 (movimento)
         passos = [passoZero];
         
         let atual = passoZero;
@@ -667,7 +640,7 @@
             passos[passos.length - 1].status = 'erro';
         }
         
-        indicePassoAtual = 0; // Configuração Inicial
+        indicePassoAtual = 0;
         corpoHistorico.innerHTML = ''; 
         limparDestaquesParsing();
         divSaida.textContent = `Análise pré-calculada: ${passos.length - 1} movimentos possíveis.`;
@@ -702,7 +675,7 @@
             return { pilha: novaPilha, entrada: novaEntrada, acao, status, naoTerminal, terminal, producao };
         }
 
-        // 1. Topo é um Terminal
+        //Topo é um Terminal
         if (TERMINAIS.includes(topo)) {
             if (topo === lookahead) {
                 novaPilha.pop(); 
@@ -714,7 +687,7 @@
                 status = 'erro';
             }
         }
-        // 2. Topo é um Não-Terminal
+        //Topo é um Não-Terminal
         else if (NAO_TERMINAIS.includes(topo)) {
             naoTerminal = topo;
             terminal = lookahead;
@@ -742,10 +715,8 @@
 
         return { pilha: novaPilha, entrada: novaEntrada, acao, status, naoTerminal, terminal, producao };
     }
-
-    /**
-     * Avança a simulação em um passo e atualiza a interface.
-     */
+    //Smilacao passo a passo
+     // Avança a simulacao
     function avancarSimulacao() {
         if (passos.length === 0) {
             if (!precalcularPassos()) {
@@ -759,9 +730,8 @@
         }
     }
     
-    /**
-     * Retorna a simulação em um passo e atualiza a interface.
-     */
+    
+    //Retorna a simula;áo um passo pra tr[as
     function retrocederSimulacao() {
         if (indicePassoAtual > 1) { 
             indicePassoAtual--;
@@ -769,9 +739,7 @@
         }
     }
 
-    /**
-     * Gera todos os passos com atraso.
-     */
+    //Gera a simula;áo em um Clique
     async function gerarTudoAutomaticamente() {
         if (isGerandoAutomaticamente) return;
         
@@ -918,13 +886,10 @@
             corpoHistorico.appendChild(tr);
         }
         
-        // O scroll é aplicado diretamente no historyScrollContainer para mostrar o último passo.
         historyScrollContainer.scrollTop = historyScrollContainer.scrollHeight;
     }
 
-    // ----------------------------------------------------
-    // Gerenciamento de Eventos (Parsing)
-    // ----------------------------------------------------
+    // Eventos (Parsing)
 
     btnProximo.addEventListener('click', (e) => {
         e.preventDefault(); 
@@ -940,10 +905,8 @@
         e.preventDefault(); 
         await gerarTudoAutomaticamente();
     });
-
-    // ----------------------------------------------------
+    
     // Inicialização
-    // ----------------------------------------------------
     document.addEventListener('DOMContentLoaded', () => {
         // Inicializa o simulador
         reiniciarDerivacao();
@@ -955,4 +918,5 @@
 </body>
 
 </html>
+
 
