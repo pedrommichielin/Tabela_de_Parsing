@@ -47,7 +47,7 @@
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             display: flex;
-            flex-direction: column; 
+            flex-direction: column;
         }
 
         h1 {
@@ -301,7 +301,7 @@
         <h2>Gerador de Sentenças Válidas (Derivação)</h2>
 
         <div class="controls" style="background-color: #e3f2fd; justify-content: flex-start;">
-            <input type="text" id="ntDerivation" placeholder="Próximo NT a expandir (ex: S)" style="width: 150px;">
+            <input type="text" id="ntDerivation" placeholder="Próximo NT a expandir (ex: S)" style="width: 150px;" disabled>
             <input type="text" id="terminalDerivation" placeholder="Terminal (ex: a)" style="width: 150px;">
             <button id="btnDerive" disabled>Aplicar Produção</button>
             <button id="btnDeriveReset">Novo Início</button>
@@ -445,7 +445,12 @@
         // ----------------------------------------------------
         // Variáveis e Tabela de Parsing (Geral)
         // ----------------------------------------------------
-
+        const GRAMATICA = {
+            S: ['aAb', 'Bb'],
+            A: ['cBc', 'aCd', 'dS'],
+            B: ['bAS', 'dA'],
+            C: ['cS', '&'] // '&' representa epsilon
+        };
         const TABELA_PARSING = {
             'S': { 'a': 'aAb', 'b': 'Bb', 'c': '-', 'd': 'Bb', '$': '-' },
             'A': { 'a': 'aCd', 'b': '-', 'c': 'cBc', 'd': 'dS', '$': '-' },
@@ -527,6 +532,7 @@
             if (isDerivacaoCompleta) return;
 
             const nt = inputNT.value.trim().toUpperCase();
+            const producaoDigitada = terminalDerivation.value.trim();  // <-- produção digitada pelo usuário
             const terminal = inputTerminal.value.trim().toLowerCase();
 
             if (!NAO_TERMINAIS.includes(nt)) {
@@ -534,47 +540,50 @@
                 return;
             }
 
+            // Encontrar posição do NT na string de derivação
             const localizacaoNT = encontrarPrimeiroNT(nt);
             if (!localizacaoNT) { return; }
 
             const { start, end } = localizacaoNT;
+
+            // Lookahead só é necessário para fins de exibição, pode deixar
             let terminalFinal = terminal;
 
             if (!terminalFinal) {
                 let lookaheadIndex = end;
-                while (lookaheadIndex < estadoDerivacao.length && NAO_TERMINAIS.includes(estadoDerivacao[lookaheadIndex])) {
+                while (lookaheadIndex < estadoDerivacao.length &&
+                    NAO_TERMINAIS.includes(estadoDerivacao[lookaheadIndex])) {
                     lookaheadIndex++;
                 }
 
-                if (lookaheadIndex < estadoDerivacao.length) {
-                    terminalFinal = estadoDerivacao[lookaheadIndex];
-                } else {
-                    terminalFinal = '$';
-                }
+                terminalFinal = (lookaheadIndex < estadoDerivacao.length)
+                    ? estadoDerivacao[lookaheadIndex]
+                    : '$';
             }
 
-            if (!TERMINAIS.includes(terminalFinal)) {
-                alert(`Erro: O Terminal "${terminalFinal}" não é válido (a, b, c, d, $).`);
+            const producoes = GRAMATICA[nt];
+
+            if (!producaoDigitada) {
+                alert("Digite uma produção, exemplo: aAb, Bb, cBc, & etc.");
                 return;
             }
 
-            const producao = (TABELA_PARSING[nt] || {})[terminalFinal] || '-';
-
-            if (producao === '-') {
-                alert(`ERRO: Não há produção válida para (${nt}, ${terminalFinal}). Derivação interrompida.`);
-                divDerivacaoSaida.className = 'results output-error';
-                btnDerivar.disabled = true;
-                isDerivacaoCompleta = true;
+            if (!producoes.includes(producaoDigitada)) {
+                alert(`Erro: A produção "${producaoDigitada}" não existe para o não-terminal ${nt}.`);
                 return;
             }
+
+            const producao = producaoDigitada;
 
             let novaDerivacao = '';
+            const sub = (producao === EPSILON || producao === '&') ? 'ε' : producao;
+
             novaDerivacao += estadoDerivacao.substring(0, start);
-            const sub = producao === EPSILON ? 'ε' : producao;
             novaDerivacao += sub;
             novaDerivacao += estadoDerivacao.substring(end);
 
             estadoDerivacao = novaDerivacao;
+
             passosDerivacao.push({
                 acao: `${nt} → ${sub.replace(/&/g, 'ε')}`,
                 terminal: terminalFinal,
@@ -586,9 +595,7 @@
             const li = document.createElement('li');
             li.innerHTML = `<strong>${nt} → ${sub.replace(/&/g, 'ε')}</strong>: ${estadoDerivacao.replace(/ε/g, '')}`;
             listaDerivacao.appendChild(li);
-
             listaDerivacao.scrollTop = listaDerivacao.scrollHeight;
-
 
             let proximoNT = '';
             let isFinished = true;
@@ -604,18 +611,21 @@
             if (isFinished) {
                 isDerivacaoCompleta = true;
                 const sentencaGerada = estadoDerivacao.replace(/ε/g, '');
+
                 divDerivacaoSaida.className = 'results output-success';
                 spanDerivacaoAtual.textContent = sentencaGerada;
-                divDerivacaoSaida.innerHTML = `✅ **SENTENÇA GERADA:** ${sentencaGerada} (em ${passosDerivacao.length} passos)`;
+                divDerivacaoSaida.innerHTML = `✅ <strong>SENTENÇA GERADA:</strong> ${sentencaGerada} (em ${passosDerivacao.length} passos)`;
+
                 btnDerivar.disabled = true;
 
                 conectarDerivacaoComParsing(sentencaGerada);
-
             } else {
                 inputNT.value = proximoNT;
                 inputTerminal.value = '';
             }
         }
+
+
 
         function conectarDerivacaoComParsing(sentencaGerada) {
             const inputSentenca = document.getElementById('inputSentence');
